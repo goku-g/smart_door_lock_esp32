@@ -18,8 +18,8 @@ const int lock = 2;
 const int LED = 16;
 
 // Replace with your network credentials
-const char* ssid = "prabhutv";
-const char* password = "0987654321";
+const char* ssid = "*******";
+const char* password = "*******";
 
 // Create AsyncWebServer object on port 80
 AsyncWebServer server(80);
@@ -35,11 +35,11 @@ boolean closedoor = false;
 #define SMTP_PORT 465
 
 /* The sign in credentials */
-#define AUTHOR_EMAIL "doorlock.esp32@gmail.com"
-#define AUTHOR_PASSWORD "esp32.lock"
+#define AUTHOR_EMAIL "********@gmail.com"
+#define AUTHOR_PASSWORD "******"
 
 /* Recipient's email*/
-#define RECIPIENT_EMAIL "nepalgorkhali143@gmail.com"
+#define RECIPIENT_EMAIL "********@gmail.com"
 
 /* The SMTP Session object used for Email sending */
 SMTPSession smtp;
