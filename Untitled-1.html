@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+      button:hover {
+        background-color: red;
+      }
+      body {
+        text-align: center;
+      }
+      .vert {
+        margin-bottom: 10%;
+      }
+      .hori {
+        margin-bottom: 0%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div class="jumbotron">
+        <h1 class="display-4">ESP32-CAM Last Photo</h1>
+        <p class="lead">
+          It might take more than 5 seconds to capture a photo.
+        </p>
+      </div>
+      <button onclick="rotatePhoto();" type="button" class="btn btn-secondary">
+        Rotate
+      </button>
+      <button onclick="capturePhoto();" type="button" class="btn btn-secondary">
+        Capture Photo
+      </button>
+      <button
+        onclick="location.reload();"
+        type="button"
+        class="btn btn-secondary"
+      >
+        Refresh Page
+      </button>
+      <div class="shadow p-3 mb-5 bg-white rounded">
+        This person wants to enter.
+      </div>
+    </div>
+    <div>
+      <img
+        src="roger.jpg"
+        id="photo"
+        class="rounded"
+        alt="Cinque Terre"
+        width="304"
+        height="236"
+      />
+    </div>
+
+    <div class="dropdown dropright">
+      <button
+        type="button"
+        class="btn btn-primary dropdown-toggle"
+        data-toggle="dropdown"
+      >
+        Door Open/Close
+      </button>
+      <div class="dropdown-menu">
+        <a
+          onclick="allowed()"
+          style="background-color: rgb(37, 141, 37); color: white"
+          class="dropdown-item"
+          href="#"
+          >Open</a
+        >
+        <a
+          onclick="notallowed()"
+          style="background-color: rgb(94, 59, 59); color: white"
+          class="dropdown-item"
+          href="#"
+          >Close</a
+        >
+      </div>
+    </div>
+  </body>
+  <script>
+    var deg = 0;
+    function capturePhoto() {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/capture", true);
+      xhr.send();
+    }
+    function allowed() {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/open", true);
+      xhr.send();
+    }
+    function notallowed() {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/close", true);
+      xhr.send();
+    }
+    function rotatePhoto() {
+      var img = document.getElementById("photo");
+      deg += 90;
+      if (isOdd(deg / 90)) {
+        document.getElementById("container").className = "vert";
+      } else {
+        document.getElementById("container").className = "hori";
+      }
+      img.style.transform = "rotate(" + deg + "deg)";
+    }
+    function isOdd(n) {
+      return Math.abs(n % 2) == 1;
+    }
+  </script>
+</html>
